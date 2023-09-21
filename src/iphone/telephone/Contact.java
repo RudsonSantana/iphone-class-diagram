@@ -1,6 +1,8 @@
 package iphone.telephone;
 
-public class Contact {
+import org.jetbrains.annotations.NotNull;
+
+public class Contact implements Comparable<Contact> {
     private String name;
     private int number;
 
@@ -23,5 +25,10 @@ public class Contact {
                 "name='" + name + '\'' +
                 ", number=" + number +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Contact c) {
+        return name.compareTo(c.getName());
     }
 }

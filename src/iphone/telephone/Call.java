@@ -3,6 +3,8 @@ package iphone.telephone;
 public class Call extends Contact {
     private boolean call;
 
+    private Contact contact;
+
     public Call(String name, int number, boolean call) {
         super(name, number);
         this.call = call;

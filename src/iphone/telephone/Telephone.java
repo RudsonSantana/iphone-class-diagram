@@ -1,5 +1,7 @@
 package iphone.telephone;
 
+import iphone.ipad.Music;
+
 import java.util.*;
 
 public class Telephone {
@@ -8,7 +10,11 @@ public class Telephone {
 
     private List<Call> callList;
 
+    private Contact contact;
+
     private Call call;
+
+    private VoiceMail voiceMail;
 
     public Telephone() {
         this.contactList = new ArrayList<>();
@@ -29,10 +35,14 @@ public class Telephone {
     }
 
     public void createContact (String name, int number) {
-        contactList.add(new Contact(name, number));
+        contact = new Contact(name, number);
+        if (!contactList.contains(contact)) {
+            contactList.add(contact);
+            Collections.sort(contactList);
+        }
     }
 
-    public void deleteContact (String name, int number) {
+    public void deleteContact (String name) {
         List<Contact> contactDelete = new ArrayList<>();
         for (Contact c: contactList) {
             if(c.getName().equals(name)) {
@@ -54,8 +64,20 @@ public class Telephone {
         return contactName;
     }
 
-    public void createVoiceMails (String voiceMail) {
-        voiceMailsList.add(new VoiceMail(voiceMail));
+    public Contact searchContactNumber(int number) {
+        if (!contactList.isEmpty()) {
+            for (Contact c: contactList) {
+                if(c.getNumber() == number) {
+                    return c;
+                }
+            }
+        }
+        contact = new Contact(null, number);
+        return contact;
+    }
+
+    public void createVoiceMails(String mensage) {
+        voiceMailsList.add(voiceMail = new VoiceMail(mensage));
     }
 
     public void deleteVoiceMails (String voiceMail) {
@@ -80,53 +102,23 @@ public class Telephone {
         return voiceMailName;
     }
 
-    public Call calling(Contact contact) {
-        call = new Call(contact);
+    public Call calling(int number) {
+        call = new Call(searchContactNumber(number));
         callList.add(call);
         return call;
     }
 
-    public Call answeredCall(Contact contact) {
+    public Call answeredCall(int number) {
         boolean toMeet = true;
         List<Call> deleteCallList = new ArrayList<>();
         for (Call c: callList) {
-            if(c.getName().equals(contact.getName())) {
+            if(c.getNumber() == number) {
                 deleteCallList.add(c);
+                call = new Call(c.getName(), number, toMeet);
             }
         }
         callList.removeAll(deleteCallList);
-        call = new Call(contact.getName(), contact.getNumber(), toMeet);
-        callList.add(call);
-
         return call;
     }
-
-
-    public static void main(String[] args) {
-        Contact contact = new Contact("Rudson", 4);
-        Contact contact2 = new Contact("Rudson S.", 5);
-        Contact contact3 = new Contact("Rudson", 6);
-
-        Telephone telephone = new Telephone();
-        telephone.contactList.add(contact);
-        telephone.contactList.add(contact2);
-        telephone.contactList.add(contact3);
-
-
-        System.out.println(telephone.contactList);
-        System.out.println();
-
-        System.out.printf("call of: " + telephone.calling(contact) + "\n");
-        System.out.println(telephone.callList);
-        System.out.println();
-
-        System.out.printf("call of: " + telephone.calling(contact2) + "\n");
-        System.out.println();
-
-        System.out.printf("answered call of: " + telephone.answeredCall(contact) + "\n");
-        System.out.println(telephone.callList);
-
-    }
-
 
 }
