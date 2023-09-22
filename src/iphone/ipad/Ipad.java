@@ -1,7 +1,6 @@
 package iphone.ipad;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Ipad {
@@ -21,16 +20,17 @@ public class Ipad {
         return music;
     }
 
-    //criar música
     public void addMusic(String name, String artist, String album) {
-        music = new Music(name, artist, album);
-        if (!musicList.contains(music)) {
-            musicList.add(music);
-            Collections.sort(musicList);
+        for (Music m : musicList) {
+            if (m.getName().equals(name)) {
+                return;
+            }
         }
+        music = new Music(name, artist, album);
+        musicList.add(music);
+        musicList.sort(music);
     }
 
-    // excluir música
     public void deleteMusic (String name) {
         List<Music> musicDeleted = new ArrayList<>();
         for (Music m: musicList) {
@@ -41,7 +41,6 @@ public class Ipad {
         musicList.removeAll(musicDeleted);
     }
 
-    // pesquisa
     public List<Music> searchMusic(String name) {
         List<Music> musicSearched = new ArrayList<>();
         if (!musicList.isEmpty()) {
@@ -101,22 +100,5 @@ public class Ipad {
         }
 
         return null;
-    }
-
-    public static void main(String[] args) {
-        Ipad ipad = new Ipad();
-        ipad.addMusic("Faroeste Caboclo", "Legião Urbana", "Que país é este");
-        ipad.addMusic("b", "c", "x");
-        ipad.addMusic("c", "c", "x");
-
-        System.out.println(ipad.musicList);
-        System.out.println();
-
-        System.out.println(ipad.play("Faroeste Caboclo"));
-        System.out.println(ipad.pause("Faroeste Caboclo"));
-        System.out.println();
-
-        System.out.println(ipad.musicList);
-
     }
 }

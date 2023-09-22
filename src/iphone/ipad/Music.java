@@ -1,10 +1,8 @@
 package iphone.ipad;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Comparator;
 
-public class Music implements Comparable<Music> {
+public class Music implements Comparator<Music> {
 
     private String name;
 
@@ -13,8 +11,8 @@ public class Music implements Comparable<Music> {
     private String album;
     private boolean playing;
 
-    public Music(String music, String artist, String album, boolean playing) {
-        this.name = music;
+    public Music(String name, String artist, String album, boolean playing) {
+        this.name =name;
         this.artist = artist;
         this.album = album;
         this.playing = playing;
@@ -39,17 +37,12 @@ public class Music implements Comparable<Music> {
         return album;
     }
 
-    public boolean isPlaying() {
+    protected boolean isPlaying() {
         return playing;
     }
 
     public void setPlaying(boolean playing) {
         this.playing = playing;
-    }
-
-    @Override
-    public int compareTo(Music m) {
-        return name.compareTo(m.getName());
     }
 
     @Override
@@ -61,4 +54,11 @@ public class Music implements Comparable<Music> {
                 ", playing=" + playing +
                 '}';
     }
+
+    @Override
+    public int compare(Music m1, Music m2) {
+        return m1.getName().compareTo(m2.getName());
+    }
 }
+
+
