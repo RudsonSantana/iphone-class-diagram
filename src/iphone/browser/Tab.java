@@ -18,17 +18,16 @@ public class Tab {
         return pageList;
     }
 
-    public String showPage(String name, String conteudo) {
-        pageList.add(site = new Page(name, conteudo));
-        return "Show page: " + site;
+    public List<Page> showPage(String name, String content) {
+        pageList.add(site = new Page(name, content));
+        return pageList;
     }
 
+
     public Page updatePage(String name) {
-        List<Page> pageUpdate = new ArrayList<>();
         if (!pageList.isEmpty()) {
             for (Page p: pageList) {
                 if(p.getName().equalsIgnoreCase(name)) {
-                    p = pageList.get(0);
                     p.setUpdate(true);
                     return p;
                 }
@@ -46,14 +45,16 @@ public class Tab {
     public static void main(String[] args) {
         Tab tab = new Tab();
 
-        System.out.println(tab.showPage("site", "conteudo"));
-        System.out.println(tab.showPage("site1", "conteudo"));
-        System.out.println(tab.showPage("site2", "conteudo"));
-        System.out.println();
-
+        tab.showPage("page", "conteudo");
+        tab.showPage("page", "conteudo");
+        tab.showPage("page", "conteudo");
         System.out.println(tab);
         System.out.println();
 
-        System.out.println(tab.updatePage("site"));
+        tab.updatePage("page");
+        tab.updatePage("page");
+        System.out.println(tab);
+        System.out.println();
+
     }
 }

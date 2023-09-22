@@ -4,13 +4,13 @@ public class Page {
 
     private String name;
 
-    private String conteudo;
+    private String content;
 
     private boolean update;
 
     public Page(String name, String conteudo) {
         this.name = name;
-        this.conteudo = conteudo;
+        this.content = conteudo;
         this.update = false;
     }
 
@@ -18,8 +18,8 @@ public class Page {
         return name;
     }
 
-    public String getConteudo() {
-        return conteudo;
+    public String getContent() {
+        return content;
     }
 
     public boolean getUpdate() {
@@ -34,7 +34,7 @@ public class Page {
     public String toString() {
         return "Page{" +
                 "name='" + name + '\'' +
-                ", conteudo='" + conteudo + '\'' +
+                ", content='" + content + '\'' +
                 ", update=" + update +
                 '}';
     }
