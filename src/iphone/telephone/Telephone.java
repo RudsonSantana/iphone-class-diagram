@@ -120,5 +120,4 @@ public class Telephone {
         callList.removeAll(deleteCallList);
         return call;
     }
-
 }
